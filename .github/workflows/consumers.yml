@@ -31,10 +31,14 @@ jobs:
         with:
           repository: ToSpec-Dev/sdk-dotnet
           path: sdk-dotnet
+      # The platform is private (A2P3-LLC org): GITHUB_TOKEN can't read it, so this
+      # needs PLATFORM_READ_TOKEN — a fine-grained PAT, resource owner A2P3-LLC,
+      # read-only Contents on tospec-platform — stored as a repo secret here.
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          repository: ToSpec-Dev/platform
+          repository: A2P3-LLC/tospec-platform
           path: platform
+          token: ${{ secrets.PLATFORM_READ_TOKEN }}
       - run: bash sdk-protocol/scripts/verify-consumers.sh
       - run: bash sdk-protocol/scripts/verify-versions.sh
       - run: npm ci && npm test && npm run build
