@@ -1,0 +1,52 @@
+name: consumer-conformance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          path: sdk-protocol
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: ToSpec-Dev/redact-node
+          path: redact-node
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: ToSpec-Dev/redact-dotnet
+          path: redact-dotnet
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: ToSpec-Dev/sdk-node
+          path: sdk-node
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: ToSpec-Dev/sdk-dotnet
+          path: sdk-dotnet
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: ToSpec-Dev/platform
+          path: platform
+      - run: bash sdk-protocol/scripts/verify-consumers.sh
+      - run: bash sdk-protocol/scripts/verify-versions.sh
+      - run: npm ci && npm test && npm run build
+        working-directory: redact-node
+      - run: npm ci && npm test && npm run build
+        working-directory: sdk-node
+      - uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
+        with:
+          global-json-file: sdk-dotnet/global.json
+      - run: dotnet test -c Release
+        working-directory: sdk-dotnet
+      - run: dotnet test -c Release
+        working-directory: redact-dotnet
+        env:
+          TOSPEC_PROTOCOL_ROOT: ${{ github.workspace }}/sdk-protocol
