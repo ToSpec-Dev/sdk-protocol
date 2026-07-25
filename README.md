@@ -104,11 +104,11 @@ one for a language not listed):
 
 | Language | Middleware target | Status |
 |---|---|---|
-| PHP | PSR-15 / Laravel | [express interest](https://github.com/ToSpec-Dev/sdk-protocol/issues) |
-| Python | ASGI (FastAPI / Django) | [express interest](https://github.com/ToSpec-Dev/sdk-protocol/issues) |
-| Java | Servlet filter / Spring | [express interest](https://github.com/ToSpec-Dev/sdk-protocol/issues) |
-| Go | `net/http` middleware | [express interest](https://github.com/ToSpec-Dev/sdk-protocol/issues) |
-| Ruby | Rack | [express interest](https://github.com/ToSpec-Dev/sdk-protocol/issues) |
+| PHP | PSR-15 / Laravel | [👍 express interest (#1)](https://github.com/ToSpec-Dev/sdk-protocol/issues/1) |
+| Python | ASGI (FastAPI / Django) | [👍 express interest (#2)](https://github.com/ToSpec-Dev/sdk-protocol/issues/2) |
+| Java | Servlet filter / Spring | [👍 express interest (#3)](https://github.com/ToSpec-Dev/sdk-protocol/issues/3) |
+| Go | `net/http` middleware | [👍 express interest (#4)](https://github.com/ToSpec-Dev/sdk-protocol/issues/4) |
+| Ruby | Rack | [👍 express interest (#5)](https://github.com/ToSpec-Dev/sdk-protocol/issues/5) |
 
 Don't want to wait? This repo is the spec and the test suite — a community port that passes
 the checklist above is provably wire-compatible, and we're glad to review and link
